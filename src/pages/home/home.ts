@@ -21,8 +21,16 @@ export class HomePage {
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
     });
   }
+
+  sendPicture(base64Image){
+
+
+
+
+  }
+
 }

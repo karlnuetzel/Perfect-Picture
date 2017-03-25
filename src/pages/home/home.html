@@ -8,6 +8,6 @@
 
 <ion-content>
   <button (click)="takePicture()">Take a Picture</button>
-  <p>Picture Test</p>
   <img [src]="base64Image"/>
+  <button (click)="sendPicture(base64Image)">Send picture</button>
 </ion-content>

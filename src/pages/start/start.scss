@@ -1,0 +1,14 @@
+page-start {
+  .vertical-align-content > *
+  {
+    display: flex!important;
+    align-content: center!important;
+    align-items: center!important;
+  }
+
+  .square {
+    width: 100% !important;
+    height:0 !important;
+    padding: 0 0 100% 0 !important;
+  }
+}

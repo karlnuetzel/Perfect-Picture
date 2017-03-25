@@ -5,6 +5,10 @@ import {Headers, RequestOptions} from '@angular/http';
 import {Response} from '@angular/http'
 import 'rxjs/add/operator/map';
 import {AlertController} from "ionic-angular";
+import {NavController} from "ionic-angular";
+import {AuthService} from "../../providers/auth-service";
+import {StartPage} from "../start/start";
+import { ActionSheetController } from 'ionic-angular';
 
 declare var $: any;
 
@@ -17,7 +21,8 @@ export class TakePhotoPage {
   public base64Image: string = "";
   public error: string = "";
 
-  constructor(private camera: Camera, private http: Http, private alertCtrl : AlertController) {
+  constructor(private camera: Camera, private http: Http, private nav: NavController, private auth: AuthService,
+              private actionSheetCtrl: ActionSheetController, private alertCtrl : AlertController) {
   }
 
   takePicture() {
@@ -83,5 +88,33 @@ export class TakePhotoPage {
           return;
         }
       );
+  }
+
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Are you sure you want to exit?',
+      buttons: [
+        {
+          text: 'Exit',
+          role: 'destructive',
+          handler: () => {
+            this.logout();
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  public logout() {
+    this.auth.logout().subscribe(succ => {
+      this.nav.setRoot(StartPage)
+    });
   }
 }

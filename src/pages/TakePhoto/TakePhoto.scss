@@ -7,11 +7,16 @@ page-take-photo {
 
   .buttons {
     margin: auto auto auto auto;
+
+    button {
+      background-color: $appTheme;
+      padding: 15px;
+    }
   }
 
   .large {
     font-size: 5em;
-    border: 2px solid black;
+    border: 2px solid $appTheme;
     padding: 50px 80px 50px 80px;
   }
 
@@ -20,10 +25,12 @@ page-take-photo {
     padding: 0;
     border-radius: 5px;
     position: relative;
+    color: $appTheme;
+    border-color: $appTheme;
   }
 
   .closeBtn {
-    background-color: black;
+    background-color: $appTheme;
     border-radius: 10px;
     padding-left: 8px !important;
     padding-right: 8px !important;
@@ -39,7 +46,7 @@ page-take-photo {
     height: 100%;
     margin: 0;
     border-radius: 10px;
-    border: 5px solid black;
+    border: 5px solid $appTheme;
   }
 
   ion-col {

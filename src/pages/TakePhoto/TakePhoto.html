@@ -24,10 +24,10 @@
     </ion-row>
     <ion-row class="buttons">
       <ion-col center>
-        <button ion-button (click)="takePicture()">Take a Picture</button>
+        <button ion-button round (click)="takePicture()">Take a Picture</button>
       </ion-col>
       <ion-col center>
-        <button ion-button id="sendPic" (click)="sendPicture(base64Image)"
+        <button ion-button round id="sendPic" (click)="sendPicture(base64Image)"
                 [disabled]="!base64Image">
           Submit picture
         </button>

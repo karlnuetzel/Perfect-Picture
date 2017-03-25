@@ -42,11 +42,19 @@ page-join {
       //background: #51CFB1;
       border-radius: 30px !important;
       //border: 1px solid #ffffff;
+      background-color: $appTheme;
+      margin: auto auto auto auto;
     }
 
     .register-btn {
       //color: #ffffff;
       font-size: 0.8em;
+      background-color: $appTheme;
     }
+  }
+
+  .button {
+    background-color: $appTheme;
+    width: 60%;
   }
 }

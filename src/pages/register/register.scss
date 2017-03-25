@@ -37,6 +37,8 @@ page-register {
       //background: #51CFB1;
       border-radius: 30px !important;
       //border: 1px solid #ffffff;
+      background-color: $appTheme;
+      margin: auto auto auto auto;
     }
   }
   .vertical-align-content > *
@@ -50,6 +52,11 @@ page-register {
     width: 100% !important;
     height:0 !important;
     padding: 0 0 100% 0 !important;
+  }
+
+  .button {
+    background-color: $appTheme;
+    width: 60%;
   }
 }
 

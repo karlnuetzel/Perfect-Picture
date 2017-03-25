@@ -29,5 +29,4 @@ export class StartPage {
   join() {
     this.navCtrl.setRoot(JoinPage);
   }
-
 }

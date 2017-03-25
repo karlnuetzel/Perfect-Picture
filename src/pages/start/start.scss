@@ -11,7 +11,12 @@ page-start {
     height:0 !important;
     padding: 0 0 100% 0 !important;
   }
+
   .button {
     background-color: $appTheme;
+  }
+
+  .image {
+    margin: auto;
   }
 }

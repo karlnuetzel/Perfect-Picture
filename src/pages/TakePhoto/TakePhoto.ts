@@ -11,6 +11,7 @@ import {NavController} from "ionic-angular";
 import {AuthService} from "../../providers/auth-service";
 import {StartPage} from "../start/start";
 import { ActionSheetController } from 'ionic-angular';
+import {WaitingPage} from "../waiting/waiting";
 
 declare var $: any;
 
@@ -62,6 +63,7 @@ export class TakePhotoPage {
           text: 'Submit',
           handler: data => {
             this.sendPic();
+            this.nav.setRoot(WaitingPage);
           }
         }
       ]
@@ -70,7 +72,7 @@ export class TakePhotoPage {
   }
 
   sendPic() {
-    let url = 'http://ec2-34-204-93-190.compute-1.amazonaws.com:3000/upload';
+    let url = 'http://ec2-34-204-93-190.compute-1.amazonaws.com:3000/uploadPicture';
     let body =
       {
         "imageData": this.base64Image

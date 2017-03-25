@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="picture">
+      <img id="picture" [src]="base64Image"/>
+      {{error}}
+    </ion-row>
+    <ion-row class="buttons">
+      <ion-col width-50>
+        <button ion-button (click)="takePicture()">Take a Picture</button>
+      </ion-col>
+      <ion-col width-50>
+        <button ion-button id="sendPic" (click)="sendPicture(base64Image)"
+                disabled={{!base64Image}}>
+          Send picture
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

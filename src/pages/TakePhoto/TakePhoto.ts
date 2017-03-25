@@ -30,7 +30,7 @@ export class TakePhotoPage {
     this.camera.getPicture(options).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
-      console.log("Image error")
+      console.log("Image error");
       this.error = err;
     });
   }

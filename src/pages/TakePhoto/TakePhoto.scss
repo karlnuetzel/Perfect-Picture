@@ -8,4 +8,16 @@ page-take-photo {
   .buttons {
     margin: auto auto auto auto;
   }
+
+  .large {
+    font-size: 5em;
+    border: 2px solid black;
+    padding: 50px 80px 50px 80px;
+  }
+
+  ion-col {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }

@@ -23,10 +23,10 @@ export class StartPage {
   }
 
   host() {
-    this.navCtrl.setRoot(RegisterPage);
+    this.navCtrl.setRoot(RegisterPage, {}, {animate: true, direction: "forward"});
   }
 
   join() {
-    this.navCtrl.setRoot(JoinPage);
+    this.navCtrl.setRoot(JoinPage, {}, {animate: true, direction: "forward"});
   }
 }

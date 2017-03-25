@@ -51,7 +51,7 @@ export class JoinPage implements OnInit {
             this.app.saveValueWithKey("username", this.registerCredentials.username);
             this.app.saveValueWithKey("password", this.registerCredentials.password);
             this.loading.dismiss();
-            this.nav.setRoot(TakePhotoPage)
+            this.nav.setRoot(TakePhotoPage, {}, {animate: true, direction: "forward"})
           });
         } else {
           this.showError("Access Denied");
@@ -83,6 +83,6 @@ export class JoinPage implements OnInit {
   }
 
   home() {
-    this.nav.setRoot(StartPage);
+    this.nav.setRoot(StartPage, {}, {animate: true, direction: "back"});
   }
 }

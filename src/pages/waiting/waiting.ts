@@ -23,9 +23,20 @@ export class WaitingPage {
 
   presentLoading() {
     this.loading = this.loadingCtrl.create({
-      content: "Waiting on other players." +
-      "Feel free to leave the app."
+      content: "Waiting on other players. " +
+      "Feel free to leave the app.",
+      duration: 5000
+
     });
     this.loading.present();
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
   }
 }

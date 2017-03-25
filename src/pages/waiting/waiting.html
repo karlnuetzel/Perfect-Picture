@@ -14,4 +14,11 @@
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="center-text">
+    <h2>Other players are still taking their turns!</h2>
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
 </ion-content>

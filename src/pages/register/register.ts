@@ -60,9 +60,7 @@ export class RegisterPage implements OnInit {
           text: 'OK',
           handler: data => {
             if (this.createSuccess) {
-              this.nav.popToRoot();
-
-              this.nav.setRoot(TakePhotoPage);
+              this.nav.setRoot(TakePhotoPage, {}, {animate: true, direction: "forward"});
             }
           }
         }
@@ -72,6 +70,6 @@ export class RegisterPage implements OnInit {
   }
 
   home() {
-    this.nav.setRoot(StartPage);
+    this.nav.setRoot(StartPage, {}, {animate: true, direction: "back"});
   }
 }

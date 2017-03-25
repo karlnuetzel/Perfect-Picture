@@ -124,7 +124,7 @@ export class TakePhotoPage {
 
   public logout() {
     this.auth.logout().subscribe(succ => {
-      this.nav.setRoot(StartPage)
+      this.nav.setRoot(StartPage, {}, {animate: true, direction: "back"})
     });
   }
 }

@@ -1,7 +1,6 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
-*~
 *.sw[mnpcod]
 *.log
 *.tmp
@@ -9,7 +8,6 @@
 log.txt
 *.sublime-project
 *.sublime-workspace
-.vscode/
 npm-debug.log*
 
 .idea/
@@ -17,7 +15,6 @@ npm-debug.log*
 .tmp/
 .versions/
 coverage/
-dist/
 node_modules/
 tmp/
 temp/

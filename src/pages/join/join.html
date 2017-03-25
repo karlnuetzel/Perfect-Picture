@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Join Existing Game</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="login-content" padding>
+  <!--<ion-row class="logo-row">-->
+    <!--<ion-col></ion-col>-->
+    <!--<ion-col width-67>-->
+      <!--&lt;!&ndash;<img src="http://placehold.it/300x200"/>&ndash;&gt;-->
+    <!--</ion-col>-->
+    <!--<ion-col></ion-col>-->
+  <!--</ion-row>-->
+  <div class="login-box">
+    <form (ngSubmit)="join()" #registerForm="ngForm">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+
+            <ion-item>
+              <ion-input type="text" placeholder="Game ID" name="gameId" [(ngModel)]="registerCredentials.gameId" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="text" placeholder="Username" name="username" [(ngModel)]="registerCredentials.username" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Join</button>
+          <!--<button ion-button class="register-btn" block clear (click)="createAccount()">Create New Account</button>-->
+        </ion-col>
+      </ion-row>
+
+    </form>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons>
+            <button ion-button round (tap)="home()">Cancel</button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

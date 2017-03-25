@@ -21,7 +21,7 @@
       </ion-col>
       <ion-col center>
         <button ion-button id="sendPic" (click)="sendPicture(base64Image)"
-                disabled={{!base64Image}}>
+                [disabled]="!base64Image">
           Send picture
         </button>
       </ion-col>

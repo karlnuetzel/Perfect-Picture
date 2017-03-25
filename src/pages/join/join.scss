@@ -45,16 +45,13 @@ page-join {
       background-color: $appTheme;
       margin: auto auto auto auto;
     }
-
-    .register-btn {
-      //color: #ffffff;
-      font-size: 0.8em;
-      background-color: $appTheme;
-    }
   }
 
   .button {
     background-color: $appTheme;
     width: 60%;
+  }
+  .button.button-round.active, .button.button-round.activated {
+    background-color: #87C23F;
   }
 }

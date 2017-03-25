@@ -58,5 +58,9 @@ page-register {
     background-color: $appTheme;
     width: 60%;
   }
+
+  .button.button-round.active, .button.button-round.activated {
+    background-color: #87C23F;
+  }
 }
 

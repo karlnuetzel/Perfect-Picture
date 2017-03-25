@@ -12,6 +12,10 @@ page-take-photo {
       background-color: $appTheme;
       padding: 15px;
     }
+
+    button.button-round.active, button.button-round.activated {
+      background-color: #87C23F;
+    }
   }
 
   .large {

@@ -8,12 +8,13 @@ import 'rxjs/add/operator/map';
 declare var $: any;
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html',
+  selector: 'page-take-photo',
+  templateUrl: 'TakePhoto.html',
   providers: [Camera]
 })
-export class HomePage {
-  public base64Image: string;
+export class TakePhotoPage {
+  public base64Image: string = "";
+  public error: string = "";
 
   constructor(private camera: Camera, private http: Http) {
   }
@@ -31,7 +32,8 @@ export class HomePage {
       console.log("Image data loaded!");
       alert("Image data loaded!");
     }, (err) => {
-      console.log("Image error")
+      console.log("Image error");
+      this.error = err;
     });
   }
 

@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="picture" center>
+      <ion-col center>
+        <img *ngIf="base64Image" id="picture" [src]="base64Image"/>
+        <ion-icon *ngIf="!base64Image" class="large icon ion-help"></ion-icon>
+        {{error}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="buttons">
+      <ion-col center>
+        <button ion-button (click)="takePicture()">Take a Picture</button>
+      </ion-col>
+      <ion-col center>
+        <button ion-button id="sendPic" (click)="sendPicture(base64Image)"
+                [disabled]="!base64Image">
+          Send picture
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

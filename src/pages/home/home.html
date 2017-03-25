@@ -7,5 +7,7 @@
 </ion-header>
 
 <ion-content>
-  <p>Content</p>
+  <button (click)="takePicture()">Take a Picture</button>
+  <p>Picture Test</p>
+  <img [src]="base64Image"/>
 </ion-content>

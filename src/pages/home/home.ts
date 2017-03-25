@@ -20,7 +20,7 @@ export class HomePage {
 
   takePicture() {
     const options: CameraOptions = {
-      quality: 30,
+      quality: 1,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -28,16 +28,19 @@ export class HomePage {
 
     this.camera.getPicture(options).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
+      console.log("Image data loaded!");
+      alert("Image data loaded!");
     }, (err) => {
       console.log("Image error")
     });
   }
 
   sendPicture() {
+    alert(this.base64Image);
     let url = 'http://ec2-34-204-93-190.compute-1.amazonaws.com:3000/upload';
     let body =
       {
-        "imageData": "swag"
+        "imageData": this.base64Image
       };
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
@@ -56,22 +59,5 @@ export class HomePage {
           return;
         }
       );
-
-    //   $.ajax({
-    //     type: "POST",
-    //     url: "http://ec2-34-204-93-190.compute-1.amazonaws.com:3000/upload",
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     data: {
-    //       "imageData": "asdfasdfsdfasdfasdf"
-    //     },
-    //     success: function (data, textStatus, jqXHR) {
-    //       alert("this worked decent");
-    //     },
-    //     error: function (jqXHR, textStatus, errorThrown) {
-    //       alert("this did work well");
-    //     }
-    //   });
   }
 }

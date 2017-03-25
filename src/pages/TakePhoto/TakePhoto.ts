@@ -5,6 +5,8 @@ import {Headers, RequestOptions} from '@angular/http';
 import {Response} from '@angular/http'
 import 'rxjs/add/operator/map';
 import {AlertController} from "ionic-angular";
+import {DomSanitizer} from '@angular/platform-browser';
+
 import {NavController} from "ionic-angular";
 import {AuthService} from "../../providers/auth-service";
 import {StartPage} from "../start/start";
@@ -22,12 +24,13 @@ export class TakePhotoPage {
   public error: string = "";
 
   constructor(private camera: Camera, private http: Http, private nav: NavController, private auth: AuthService,
-              private actionSheetCtrl: ActionSheetController, private alertCtrl : AlertController) {
+              private actionSheetCtrl: ActionSheetController, private alertCtrl : AlertController,
+        private _DomSanitizationService: DomSanitizer) {
   }
 
   takePicture() {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 1,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -36,9 +39,10 @@ export class TakePhotoPage {
     this.camera.getPicture(options).then((imageData) => {
       this.base64Image = 'data:image/jpeg;base64,' + imageData;
       console.log("Image data loaded!");
-      alert("Image data loaded!");
+      // alert("Image data loaded!");
     }, (err) => {
       console.log("Image error");
+      this.closePreview();
       this.error = err;
     });
   }
@@ -88,6 +92,10 @@ export class TakePhotoPage {
           return;
         }
       );
+  }
+
+  closePreview() {
+    this.base64Image = "";
   }
 
   presentActionSheet() {

@@ -15,6 +15,33 @@ page-take-photo {
     padding: 50px 80px 50px 80px;
   }
 
+  #pic-parent {
+    margin: 15px;
+    padding: 0;
+    border-radius: 5px;
+    position: relative;
+  }
+
+  .closeBtn {
+    background-color: black;
+    border-radius: 10px;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    font-size: 3em;
+    color: red;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  #picture {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 10px;
+    border: 5px solid black;
+  }
+
   ion-col {
     text-align: center !important;
     margin-left: auto !important;

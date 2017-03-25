@@ -15,9 +15,11 @@
   <ion-grid>
     <ion-row class="picture" center>
       <ion-col center>
-        <img *ngIf="base64Image" id="picture" [src]="base64Image"/>
-        <ion-icon *ngIf="!base64Image" class="large icon ion-help"></ion-icon>
-        {{error}}
+        <div id="pic-parent">
+          <ion-icon *ngIf="base64Image" class="closeBtn icon ion-close-round" (tap)="closePreview()"></ion-icon>
+          <img *ngIf="base64Image" id="picture" [src]="_DomSanitizationService.bypassSecurityTrustUrl(base64Image)"/>
+          <ion-icon *ngIf="!base64Image" class="large icon ion-help"></ion-icon>
+        </div>
       </ion-col>
     </ion-row>
     <ion-row class="buttons">

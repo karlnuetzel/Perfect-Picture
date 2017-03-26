@@ -44,7 +44,9 @@ export class JoinPage implements OnInit {
 
     public join() {
         this.showLoading();
-        this.auth.login(this.registerCredentials).subscribe((allowed, reason: string = "") => {
+        this.auth.login(this.registerCredentials).subscribe((response) => {
+                let allowed = response[0];
+                let reason = response[1];
                 if (allowed) {
                     setTimeout(() => {
                         this.showPopup('success', reason);
@@ -56,10 +58,12 @@ export class JoinPage implements OnInit {
                     });
                 } else {
                     this.showPopup("error", reason);
+                    this.loading.dismiss();
                 }
             },
             error => {
                 this.showPopup("error", error);
+                this.loading.dismiss();
             });
     }
 
@@ -78,7 +82,7 @@ export class JoinPage implements OnInit {
             css = "success"
         }
         let alert = this.toastCtrl.create({
-            message: "text",
+            message: text,
             position: "bottom",
             cssClass: css,
             showCloseButton: true,

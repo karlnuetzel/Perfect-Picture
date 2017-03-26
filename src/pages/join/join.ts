@@ -5,6 +5,7 @@ import {RegisterPage} from '../register/register';
 import {TakePhotoPage} from "../TakePhoto/TakePhoto";
 import {StartPage} from "../start/start";
 import {MyApp} from "../../app/app.component";
+import {WaitingPage} from "../waiting/waiting";
 
 @Component({
     selector: 'page-join',
@@ -54,7 +55,7 @@ export class JoinPage implements OnInit {
                         this.app.saveValueWithKey("username", this.registerCredentials.username);
                         this.app.saveValueWithKey("password", this.registerCredentials.password);
                         this.loading.dismiss();
-                        this.nav.setRoot(TakePhotoPage, {}, {animate: true, direction: "forward"})
+                        this.nav.setRoot(WaitingPage, {}, {animate: true, direction: "forward"})
                     });
                 } else {
                     this.showPopup("error", reason);

@@ -18,19 +18,6 @@ export class WaitingPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
   private loadingCtrl : LoadingController, private actionSheetCtrl: ActionSheetController, private auth: AuthService,) {
-
-    this.presentLoading();
-  }
-
-
-  presentLoading() {
-    this.loading = this.loadingCtrl.create({
-      content: "Waiting on other players. " +
-      "Feel free to leave the app.",
-      duration: 5000
-
-    });
-    this.loading.present();
   }
 
   doRefresh(refresher) {

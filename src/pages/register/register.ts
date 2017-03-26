@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import {NavController, AlertController, ToastController} from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import {TakePhotoPage} from "../TakePhoto/TakePhoto";
 import {StartPage} from "../start/start";
@@ -14,7 +14,7 @@ export class RegisterPage implements OnInit {
   registerCredentials = {gameId: '', username: '', password: ''};
   app: any = MyApp;
 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController) {}
+  constructor(private nav: NavController, private auth: AuthService, private toastCtrl: ToastController) {}
 
   ngOnInit() : void {
     this.app.fetchValueFromKey("gameId").then((value) => {
@@ -41,30 +41,30 @@ export class RegisterPage implements OnInit {
           this.app.saveValueWithKey("username", this.registerCredentials.username);
           this.app.saveValueWithKey("password", this.registerCredentials.password);
           this.createSuccess = true;
-          this.showPopup("Success", "Account created.");
+          this.showPopup("success", "Account created sucessfully.");
         } else {
-          this.showPopup("Error", "Problem creating account.");
+          this.showPopup("error", "Problem creating account.");
         }
       },
       error => {
-        this.showPopup("Error", error);
+        this.showPopup("error", error);
       });
   }
 
-  showPopup(title, text) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: text,
-      buttons: [
-        {
-          text: 'OK',
-          handler: data => {
-            if (this.createSuccess) {
-              this.nav.setRoot(TakePhotoPage, {}, {animate: true, direction: "forward"});
-            }
-          }
-        }
-      ]
+  showPopup(type, text) {
+    let css : string = "";
+    if (type=="error") {
+      css = "error"
+    } else if (type=="success") {
+      css = "success"
+    }
+    let alert = this.toastCtrl.create({
+      message: "text",
+      position: "bottom",
+      cssClass: css,
+      showCloseButton: true,
+      closeButtonText: "Okay",
+      duration: 3000
     });
     alert.present();
   }

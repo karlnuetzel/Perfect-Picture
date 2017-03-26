@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActionSheetController, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service";
 import {StartPage} from "../start/start";
-import {Player} from "./player";
+import {Player} from "../../app/player";
 import {MyApp} from "../../app/app.component";
 
 /*
@@ -17,7 +17,7 @@ import {MyApp} from "../../app/app.component";
 })
 export class WinnerPage implements OnInit {
   app: any = MyApp;
-  private players: Array<Object>;
+  private players;
   public loading: Loading;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private nav: NavController, private auth: AuthService,
@@ -56,30 +56,40 @@ export class WinnerPage implements OnInit {
   fromService(option: String): void {
     setTimeout(() => {
       this.players = [{
-        "round" : "1",
+        "round" : 1,
         "username" : "Kyle",
-        "scoreThisRound" : "0",
-        "totalScore" : "79"
+        "scoreThisRound" : 0,
+        "totalScore" : 79
       }, {
-        "round" : "1",
+        "round" : 1,
         "username" : "Justin",
-        "scoreThisRound" : "50",
-        "totalScore" : "50"
+        "scoreThisRound" : 50,
+        "totalScore" : 50
       }, {
-        "round" : "1",
+        "round" : 1,
         "username" : "Alex",
-        "scoreThisRound" : "0",
-        "totalScore" : "95"
+        "scoreThisRound" : 0,
+        "totalScore" : 95
       }, {
-        "round" : "1",
+        "round" : 1,
         "username" : "Brandon",
-        "scoreThisRound" : "0",
-        "totalScore" : "80"
+        "scoreThisRound" : 0,
+        "totalScore" : 80
       }];
 
       this.players = JSON.parse(JSON.stringify(this.players));
 
-      MyApp.saveValueWithKey("players", this.players);
+      Player.round = this.players[0].round++;
+      MyApp.saveValueWithKey("round", this.players[0].round++);
+
+      this.players.forEach(function(player){
+        if (player.username == Player.username){
+          Player.scoreThisRound = player.scoreThisRound;
+          MyApp.saveValueWithKey("scoreThisRound", Player.scoreThisRound);
+          Player.totalScore = player.totalScore;
+          MyApp.saveValueWithKey("totalScore", Player.totalScore);
+        }
+      });
 
       option != "no-loading" ? this.loading.dismissAll() : "";
     }, 2000);

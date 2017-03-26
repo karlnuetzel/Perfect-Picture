@@ -33,6 +33,7 @@ export class AuthService {
             let message = response.body;
 
             if (access){
+                message = "Successfully logged in.";
                 Player.username = credentials.username;
                 MyApp.fetchValueFromKey("round").then((value) => {
                     if (value != null) {

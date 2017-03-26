@@ -47,6 +47,7 @@ export class JoinPage implements OnInit {
         this.auth.login(this.registerCredentials).subscribe((allowed, reason: string = "") => {
                 if (allowed) {
                     setTimeout(() => {
+                        this.showPopup('success', reason);
                         this.app.saveValueWithKey("gameId", this.registerCredentials.gameId);
                         this.app.saveValueWithKey("username", this.registerCredentials.username);
                         this.app.saveValueWithKey("password", this.registerCredentials.password);

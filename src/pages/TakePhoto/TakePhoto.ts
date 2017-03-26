@@ -6,11 +6,10 @@ import {Response} from '@angular/http'
 import 'rxjs/add/operator/map';
 import {AlertController} from "ionic-angular";
 import {DomSanitizer} from '@angular/platform-browser';
-
 import {NavController} from "ionic-angular";
 import {AuthService} from "../../providers/auth-service";
 import {StartPage} from "../start/start";
-import { ActionSheetController } from 'ionic-angular';
+import {ActionSheetController} from 'ionic-angular';
 import {WaitingPage} from "../waiting/waiting";
 
 declare var $: any;
@@ -24,9 +23,13 @@ export class TakePhotoPage {
   public base64Image: string = "";
   public error: string = "";
 
-  constructor(private camera: Camera, private http: Http, private nav: NavController, private auth: AuthService,
-              private actionSheetCtrl: ActionSheetController, private alertCtrl : AlertController,
-        private _DomSanitizationService: DomSanitizer) {
+  constructor(private camera: Camera,
+              private http: Http,
+              private nav: NavController,
+              private auth: AuthService,
+              private actionSheetCtrl: ActionSheetController,
+              private alertCtrl: AlertController,
+              private _DomSanitizationService: DomSanitizer) {
   }
 
   takePicture() {
@@ -37,15 +40,15 @@ export class TakePhotoPage {
       mediaType: this.camera.MediaType.PICTURE
     };
 
-    this.camera.getPicture(options).then((imageData) => {
-      this.base64Image = 'data:image/jpeg;base64,' + imageData;
-      console.log("Image data loaded!");
-      // alert("Image data loaded!");
-    }, (err) => {
-      console.log("Image error");
-      this.closePreview();
-      this.error = err;
-    });
+    this.camera.getPicture(options)
+      .then((imageData) => {
+        this.base64Image = 'data:image/jpeg;base64,' + imageData;
+        console.log("Image data loaded!");
+      }, (err) => {
+        console.log("Image error!");
+        this.closePreview();
+        this.error = err;
+      });
   }
 
   sendPicture() {
@@ -75,8 +78,13 @@ export class TakePhotoPage {
     let url = 'http://ec2-34-204-93-190.compute-1.amazonaws.com:3000/uploadPicture';
     let body =
       {
-        "imageData": this.base64Image
+        "gameID": "1",
+        "roundID": "1",
+        "playerID": "1",
+        "imageID": new Date().getTime(),
+        "imageData": this.base64Image,
       };
+
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
@@ -110,7 +118,7 @@ export class TakePhotoPage {
           handler: () => {
             this.logout();
           }
-        },{
+        }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {

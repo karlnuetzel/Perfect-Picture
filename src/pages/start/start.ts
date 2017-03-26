@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {TakePhotoPage} from '../TakePhoto/TakePhoto';
 import {RegisterPage} from "../register/register";
 import {JoinPage} from "../join/join";
+import {PreviewPhotoPage} from "../preview-photo/preview-photo";
 // import {WinnerPage} from "../winner/winner";
 
 /*
@@ -34,4 +35,7 @@ export class StartPage {
   // winners() {
   //   this.navCtrl.setRoot(WinnerPage, {}, {animate: true, direction: "forward"});
   // }
+  openPreview(){
+    this.navCtrl.setRoot(PreviewPhotoPage, {}, {animate: true, direction: "forward"});
+  }
 }

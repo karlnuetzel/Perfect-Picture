@@ -11,6 +11,7 @@ import {JoinPage} from "../pages/join/join";
 import {RegisterPage} from "../pages/register/register";
 import {WaitingPage} from "../pages/waiting/waiting";
 import {WinnerPage} from "../pages/winner/winner";
+import {PreviewPhotoPage} from "../pages/preview-photo/preview-photo";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {WinnerPage} from "../pages/winner/winner";
     JoinPage,
     RegisterPage,
     WaitingPage,
-    WinnerPage
+    WinnerPage,
+      PreviewPhotoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -34,7 +36,8 @@ import {WinnerPage} from "../pages/winner/winner";
     JoinPage,
     RegisterPage,
     WaitingPage,
-    WinnerPage
+    WinnerPage,
+      PreviewPhotoPage
   ],
   providers: [
     StatusBar,

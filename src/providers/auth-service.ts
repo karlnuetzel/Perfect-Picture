@@ -99,9 +99,19 @@ export class AuthService {
 
   public register(credentials) {
     if (credentials.username === null || credentials.gameId === null || credentials.password === null) {
-      return Observable.throw("Please insert credentials");
+        return Observable.throw("Please insert credentials");
     } else {
       // At this point store the credentials to your backend!
+        MyApp.saveValueWithKey("username", credentials.username);
+        MyApp.saveValueWithKey("gameId", credentials.gameId);
+        MyApp.saveValueWithKey("password", credentials.password);
+        MyApp.saveValueWithKey("round", 1);
+        MyApp.saveValueWithKey("scoreThisRound", 0);
+        MyApp.saveValueWithKey("totalScore", 0);
+        Player.username = credentials.username;
+        Player.round = 1;
+        Player.scoreThisRound = 0;
+        Player.totalScore = 0;
       return Observable.create(observer => {
         observer.next(true);
         observer.complete();
@@ -115,7 +125,7 @@ export class AuthService {
 
   public logout() {
     return Observable.create(observer => {
-      this.currentUser = null;
+      // this.currentUser = null;
       observer.next(true);
       observer.complete();
     });

@@ -42,6 +42,7 @@ export class RegisterPage implements OnInit {
           this.app.saveValueWithKey("password", this.registerCredentials.password);
           this.createSuccess = true;
           this.showPopup("success", "Account created sucessfully.");
+          this.nav.setRoot(TakePhotoPage, {}, {animate: true, direction: "forward"})
         } else {
           this.showPopup("error", "Problem creating account.");
         }
@@ -59,7 +60,7 @@ export class RegisterPage implements OnInit {
       css = "success"
     }
     let alert = this.toastCtrl.create({
-      message: "text",
+      message: text,
       position: "bottom",
       cssClass: css,
       showCloseButton: true,

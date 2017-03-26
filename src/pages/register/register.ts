@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController, AlertController, ToastController} from 'ionic-angular';
+import {NavController, ToastController} from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import {TakePhotoPage} from "../TakePhoto/TakePhoto";
 import {StartPage} from "../start/start";

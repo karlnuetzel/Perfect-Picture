@@ -25,19 +25,24 @@
   </ion-refresher>
   <ion-grid>
     <ion-row>
-      <ion-col>Name</ion-col>
-      <ion-col>Score This Round</ion-col>
-      <ion-col>Total Score</ion-col>
+      <ion-col><b>Name</b></ion-col>
+      <ion-col><b>Score This Round</b></ion-col>
+      <ion-col><b>Total Score</b></ion-col>
     </ion-row>
     <div *ngFor="let item of players; let i = index">
-    <ion-row id="player-{{i}}">
-      <!--<ion-row>-->
+      <ion-row id="player-{{i}}">
+        <!--<ion-row>-->
 
-      <ion-col>{{item.username}}</ion-col>
-      <ion-col>{{item.scoreThisRound}}</ion-col>
-      <ion-col>{{item.totalScore}}</ion-col>
-    </ion-row>
+        <ion-col>{{item.username}}</ion-col>
+        <ion-col>{{item.scoreThisRound}}</ion-col>
+        <ion-col>{{item.totalScore}}</ion-col>
+      </ion-row>
     </div>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col><button ion-button round>Next</button></ion-col>
+      <ion-col></ion-col>
+    </ion-row>
   </ion-grid>
 
 </ion-content>

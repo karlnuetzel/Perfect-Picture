@@ -17,7 +17,7 @@ export class RegisterPage implements OnInit {
   constructor(private nav: NavController, private auth: AuthService, private toastCtrl: ToastController) {}
 
   ngOnInit() : void {
-    this.app.fetchValueFromKey("gameId").then((value) => {
+    this.app.fetchValueFromKey("gameID").then((value) => {
       if (value != null) {
         this.registerCredentials.gameId = value;
       }

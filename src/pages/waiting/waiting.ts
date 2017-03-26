@@ -92,7 +92,6 @@ export class WaitingPage implements OnInit {
             .subscribe(
                 (responseBody: Object) => {
                     console.log("Response Body: \"" + responseBody + "\"");
-                    alert(JSON.stringify(responseBody));
                     callback(responseBody);
                 }, err => {
                     // alert(err);
@@ -120,7 +119,6 @@ export class WaitingPage implements OnInit {
                 (responseBody: Object) => {
                     console.log("Response Body: \"" + responseBody + "\"");
                     // callback(JSON.parse(JSON.stringify(responseBody)).base64string);
-                    alert(JSON.stringify(responseBody));
 
                     this.base64string = (JSON.parse(JSON.stringify(responseBody)).base64string);
                 }, err => {

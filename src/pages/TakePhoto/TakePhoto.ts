@@ -12,6 +12,7 @@ import {StartPage} from "../start/start";
 import {ActionSheetController} from 'ionic-angular';
 import {WaitingPage} from "../waiting/waiting";
 import {WinnerPage} from "../winner/winner";
+import {Player} from "../../app/player";
 
 declare var $: any;
 
@@ -55,7 +56,7 @@ export class TakePhotoPage {
   }
 
   sendPicture() {
-    let alert = this.alertCtrl.create({
+    let confirm = this.alertCtrl.create({
       title: 'Confirm Submission',
       subTitle: 'Are you sure you want to submit this picture?',
       buttons: [
@@ -69,28 +70,21 @@ export class TakePhotoPage {
           text: 'Submit',
           handler: data => {
             this.sendPic();
-            this.getResults(function(res) {
-              let json = JSON.parse(JSON.stringify(res));
-              if (json != []) {
-                this.nav.setRoot(WinnerPage, {obj: json}, {animate: true, direction: "forward"});
-              } else {
-                this.nav.setRoot(WaitingPage, {waitReason: "waitingOnOthers"}, {animate: true, direction: "forward"});
-              }
-            });
+            this.nav.setRoot(WaitingPage, {waitReason: "waitingOnOthers"}, {animate: true, direction: "forward"});
           }
         }
       ]
     });
-    alert.present();
+    confirm.present();
   }
 
   sendPic() {
     let url = 'http://ec2-34-204-93-190.compute-1.amazonaws.com:3000/uploadPicture';
     let body =
       {
-        "gameID": "1",
-        "roundID": "1",
-        "playerID": "1",
+        "gameID": Player.gameId,
+        "roundID": "" + Player.round,
+        "playerID": "" + Player.id,
         "imageID": new Date().getTime(),
         "imageData": this.base64Image,
       };

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavController, NavParams, LoadingController, ActionSheetController} from 'ionic-angular';
 import {StartPage} from "../start/start";
 import {AuthService} from "../../providers/auth-service";
@@ -16,7 +16,7 @@ import {WinnerPage} from "../winner/winner";
   selector: 'page-waiting',
   templateUrl: 'waiting.html'
 })
-export class WaitingPage {
+export class WaitingPage implements OnInit {
   loading: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -25,20 +25,28 @@ export class WaitingPage {
 
   }
 
-  doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-    setTimeout(() => {
+  ngOnInit(){
+    if (this.navParams.get("waitReason") == "waitingOnOthers"){
       this.getResults(function(res){
         let json = JSON.parse(JSON.stringify(res));
-        if (json != []) {
-          if (this.navParams.get("waitReason") == "notJudge"){
-            this.navCtrl.setRoot(TakePhotoPage, {}, {animate: true, direction: "forward"});
-          } else if (this.navParams.get("waitReason") == "waitingOnOthers"){
-            this.navCtrl.setRoot(WinnerPage, {obj: json}, {animate: true, direction: "forward"});
-          }
+        if (json.results != []) {
+          this.navCtrl.setRoot(WinnerPage, json, {animate: true, direction: "forward"});
         }
       });
+    }
+  }
 
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.getResults(function(res){
+      let json = JSON.parse(JSON.stringify(res));
+      if (json.results != []) {
+        this.navCtrl.setRoot(WinnerPage, json, {animate: true, direction: "forward"});
+      } else if (this.navParams.get("waitReason") == "notJudge"){
+        this.navCtrl.setRoot(TakePhotoPage, {}, {animate: true, direction: "forward"});
+      }
+    });
+    setTimeout(() => {
       console.log('Async operation has ended');
       refresher.complete();
     }, 2000);

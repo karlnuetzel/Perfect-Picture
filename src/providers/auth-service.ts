@@ -61,6 +61,14 @@ export class AuthService {
                                 Player.totalScore = 0;
                             }
                         });
+
+                        MyApp.fetchValueFromKey("gameId").then((value) => {
+                            if (value != null) {
+                                Player.gameId = value;
+                            } else {
+                                Player.gameId = "0";
+                            }
+                        });
                     }
                     observer.next([access, message]);
                     observer.complete();

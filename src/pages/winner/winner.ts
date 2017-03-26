@@ -35,7 +35,7 @@ export class WinnerPage implements OnInit {
 
     fromService(option: String): void {
 
-        this.players = this.navParams.get("obj");
+        this.players = this.navParams.get("results");
 
         Player.round = this.players[0].round++;
         MyApp.saveValueWithKey("round", this.players[0].round++);

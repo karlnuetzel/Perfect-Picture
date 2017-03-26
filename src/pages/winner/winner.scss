@@ -1,3 +1,20 @@
 page-winner {
 
+  ion-grid {
+    //color: $appTheme;
+  }
+  ion-col {
+    //color: $appTheme;
+    //border: thin solid #87C23F;
+    font-size: larger;
+    height: 75px;
+  }
+
+  .button {
+    background-color: $appTheme;
+  }
+
+  .button.button-round.active, .button.button-round.activated {
+    background-color: #87C23F;
+  }
 }

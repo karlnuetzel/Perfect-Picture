@@ -113,8 +113,11 @@ export class TakePhotoPage {
     let url = 'http://ec2-34-204-93-190.compute-1.amazonaws.com:3000/results';
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
+    let body = {
+      gameID : Player.gameId
+    };
     this.http
-        .get(url, options)
+        .post(url, body, options)
         .map(
             (response: Response) => {
               console.log(response);

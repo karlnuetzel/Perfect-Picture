@@ -1,0 +1,49 @@
+page-preview-photo {
+  .picture {
+    height: 70vh;
+    text-align: center;
+    margin: 15px auto auto auto;
+  }
+
+  .buttons {
+    margin: auto auto auto auto;
+
+    button {
+      background-color: $appTheme;
+      padding: 15px;
+    }
+
+    button.button-round.active, button.button-round.activated {
+      background-color: #87C23F;
+    }
+  }
+
+  .large {
+    font-size: 5em;
+    border: 2px solid $appTheme;
+    padding: 50px 80px 50px 80px;
+  }
+
+  #pic-parent {
+    margin: 15px;
+    padding: 0;
+    border-radius: 5px;
+    position: relative;
+    color: $appTheme;
+    border-color: $appTheme;
+  }
+
+  #picture {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 10px;
+    border: 5px solid $appTheme;
+  }
+
+  ion-col {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}

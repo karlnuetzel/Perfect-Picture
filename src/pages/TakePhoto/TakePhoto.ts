@@ -36,7 +36,7 @@ export class TakePhotoPage {
 
   takePicture() {
     const options: CameraOptions = {
-      quality: 1,
+      quality: 75,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -84,7 +84,8 @@ export class TakePhotoPage {
       {
         "gameID": Player.gameId,
         "roundID": "" + Player.round,
-        "playerID": "" + Player.id,
+        "username": Player.username,
+        // "playerID": "" + Player.id,
         "imageID": new Date().getTime(),
         "imageData": this.base64Image,
       };

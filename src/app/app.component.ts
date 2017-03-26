@@ -4,17 +4,12 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {StartPage} from "../pages/start/start";
 import {Storage} from "@ionic/storage";
-import {TakePhotoPage} from '../pages/TakePhoto/TakePhoto';
-import {WaitingPage} from '../pages/waiting/waiting';
-
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  // rootPage = HomePage;
     rootPage = StartPage;
-  // rootPage = TakePhotoPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               public storage: Storage) {

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {NavController, AlertController, LoadingController, Loading, ToastController} from 'ionic-angular';
 import {AuthService} from '../../providers/auth-service';
 import {RegisterPage} from '../register/register';
-import {TakePhotoPage} from "../TakePhoto/TakePhoto";
 import {StartPage} from "../start/start";
 import {MyApp} from "../../app/app.component";
 import {WaitingPage} from "../waiting/waiting";
@@ -37,10 +36,6 @@ export class JoinPage implements OnInit {
                 this.registerCredentials.password = value;
             }
         });
-    }
-
-    public createAccount() {
-        this.nav.push(RegisterPage);
     }
 
     public join() {

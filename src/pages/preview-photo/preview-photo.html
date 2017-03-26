@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Home
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="presentActionSheet()">
+        <ion-icon name="log-out">Exit</ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="picture" center>
+      <ion-col center>
+        <div id="pic-parent">
+          <img *ngIf="base64Image" id="picture" [src]="_DomSanitizationService.bypassSecurityTrustUrl(base64Image)"/>
+          <ion-icon *ngIf="!base64Image" class="large icon ion-help"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="buttons">
+      <ion-col center>
+        <button ion-button round (click)="takeOwnPic()">Take your picture</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

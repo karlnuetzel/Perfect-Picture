@@ -6,6 +6,8 @@ import {Player} from "../../app/player";
 import {MyApp} from "../../app/app.component";
 import {TakePhotoPage} from "../TakePhoto/TakePhoto";
 import {WaitingPage} from "../waiting/waiting";
+import {Response, RequestOptions, Headers, Http} from "@angular/http";
+import {PreviewPhotoPage} from "../preview-photo/preview-photo";
 
 /*
  Generated class for the Winner page.
@@ -25,7 +27,7 @@ export class WinnerPage implements OnInit {
     public highScore: string = "";
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private nav: NavController, private auth: AuthService,
-                private actionSheetCtrl: ActionSheetController, public loadingCtrl: LoadingController) {
+                private actionSheetCtrl: ActionSheetController, public loadingCtrl: LoadingController, public http: Http) {
     }
 
 
@@ -64,8 +66,37 @@ export class WinnerPage implements OnInit {
         if (Player.isJudge) {
             this.nav.setRoot(TakePhotoPage, {}, {animate: true, direction: "forward"});
         } else {
-            this.nav.setRoot(WaitingPage, {waitReason: "notJudge"}, {animate: true, direction: "forward"});
+            this.getPicture(function(pic){
+                if (pic.base64string){
+                    this.nav.setRoot(PreviewPhotoPage, {}, {animate: true, direction: "forward"});
+                } else {
+                    this.nav.setRoot(WaitingPage, {waitReason: "notJudge"}, {animate: true, direction: "forward"});
+                }
+            })
         }
+    }
+
+    getPicture(callback){
+        let url = 'http://ec2-34-204-93-190.compute-1.amazonaws.com:3000/judgesImage';
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers: headers});
+        this.http
+            .get(url, options)
+            .map(
+                (response: Response) => {
+                    console.log(response);
+                    return response.json();
+                }
+            )
+            .subscribe(
+                (responseBody: Object) => {
+                    console.log("Response Body: \"" + responseBody + "\"");
+                    callback(JSON.parse(JSON.stringify(responseBody)).base64string);
+                }, err => {
+                    // alert(err);
+                }
+            );
+        // return "";
     }
 
     presentActionSheet() {

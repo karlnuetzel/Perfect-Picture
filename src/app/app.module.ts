@@ -10,6 +10,7 @@ import {AuthService} from "../providers/auth-service";
 import {JoinPage} from "../pages/join/join";
 import {RegisterPage} from "../pages/register/register";
 import {WaitingPage} from "../pages/waiting/waiting";
+import {WinnerPage} from "../pages/winner/winner";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {WaitingPage} from "../pages/waiting/waiting";
     StartPage,
     JoinPage,
     RegisterPage,
-    WaitingPage
+    WaitingPage,
+    WinnerPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -31,7 +33,8 @@ import {WaitingPage} from "../pages/waiting/waiting";
     StartPage,
     JoinPage,
     RegisterPage,
-    WaitingPage
+    WaitingPage,
+    WinnerPage
   ],
   providers: [
     StatusBar,

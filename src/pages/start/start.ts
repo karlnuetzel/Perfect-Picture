@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {TakePhotoPage} from '../TakePhoto/TakePhoto';
 import {RegisterPage} from "../register/register";
 import {JoinPage} from "../join/join";
+import {WinnerPage} from "../winner/winner";
 
 /*
   Generated class for the Start page.
@@ -28,5 +29,9 @@ export class StartPage {
 
   join() {
     this.navCtrl.setRoot(JoinPage, {}, {animate: true, direction: "forward"});
+  }
+
+  winners() {
+    this.navCtrl.setRoot(WinnerPage, {}, {animate: true, direction: "forward"});
   }
 }

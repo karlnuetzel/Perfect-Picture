@@ -6,43 +6,49 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Round 1</ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="presentActionSheet()">
-        <ion-icon name="log-out">Exit</ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Round 1</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="presentActionSheet()">
+                <ion-icon name="log-out">Exit</ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
 
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  <ion-grid>
-    <ion-row>
-      <ion-col><b>Name</b></ion-col>
-      <ion-col><b>Score This Round</b></ion-col>
-      <ion-col><b>Total Score</b></ion-col>
-    </ion-row>
-    <div *ngFor="let item of players; let i = index">
-      <ion-row id="player-{{i}}">
-        <!--<ion-row>-->
-
-        <ion-col>{{item.username}}</ion-col>
-        <ion-col>{{item.scoreThisRound}}</ion-col>
-        <ion-col>{{item.totalScore}}</ion-col>
-      </ion-row>
-    </div>
-    <ion-row>
-      <ion-col></ion-col>
-      <ion-col><button ion-button round>Next</button></ion-col>
-      <ion-col></ion-col>
-    </ion-row>
-  </ion-grid>
+    <!--<ion-refresher (ionRefresh)="doRefresh($event)">-->
+    <!--<ion-refresher-content></ion-refresher-content>-->
+    <!--</ion-refresher>-->
+    <ion-grid>
+        <ion-row>
+            <ion-col><b>Name</b></ion-col>
+            <ion-col><b>Score This Round</b></ion-col>
+            <ion-col><b>Total Score</b></ion-col>
+        </ion-row>
+        <div *ngFor="let item of players; let i = index">
+            <ion-row id="player-{{i}}" class="{{getWinner(item)}}">
+                <!--<ion-row>-->
+                <ion-col>{{item.username}}</ion-col>
+                <ion-col>{{item.scoreThisRound}}</ion-col>
+                <ion-col>{{item.totalScore}}</ion-col>
+            </ion-row>
+        </div>
+        <ion-row *ngIf="highScore != ''">
+            {{highUser}} won the round with a score of {{highSchore}}!
+        </ion-row>
+        <ion-row>
+            <ion-col></ion-col>
+            <ion-col center>
+                <button ion-button round (tap)="nextRound()">Next
+                    <ion-icon class="icon ion-right"></ion-icon>
+                </button>
+            </ion-col>
+            <ion-col></ion-col>
+        </ion-row>
+    </ion-grid>
 
 </ion-content>

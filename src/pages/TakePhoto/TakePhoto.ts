@@ -11,6 +11,7 @@ import {AuthService} from "../../providers/auth-service";
 import {StartPage} from "../start/start";
 import {ActionSheetController} from 'ionic-angular';
 import {WaitingPage} from "../waiting/waiting";
+import {WinnerPage} from "../winner/winner";
 
 declare var $: any;
 
@@ -68,7 +69,14 @@ export class TakePhotoPage {
           text: 'Submit',
           handler: data => {
             this.sendPic();
-            this.nav.setRoot(WaitingPage);
+            this.getResults(function(res) {
+              let json = JSON.parse(JSON.stringify(res));
+              if (json != []) {
+                this.nav.setRoot(WinnerPage, {obj: json}, {animate: true, direction: "forward"});
+              } else {
+                this.nav.setRoot(WaitingPage, {waitReason: "waitingOnOthers"}, {animate: true, direction: "forward"});
+              }
+            });
           }
         }
       ]
@@ -104,6 +112,29 @@ export class TakePhotoPage {
           return;
         }
       );
+  }
+
+  getResults(callback) {
+    let url = 'http://ec2-34-204-93-190.compute-1.amazonaws.com:3000/results';
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    this.http
+        .get(url, options)
+        .map(
+            (response: Response) => {
+              console.log(response);
+              return response.json();
+            }
+        )
+        .subscribe(
+            (responseBody: Object) => {
+              console.log("Response Body: \"" + responseBody + "\"");
+              callback(responseBody);
+            }, err => {
+              // alert(err);
+            }
+        );
+    // return "";
   }
 
   closePreview() {

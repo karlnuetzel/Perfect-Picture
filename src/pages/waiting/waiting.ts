@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import {NavController, NavParams, LoadingController, ActionSheetController} from 'ionic-angular';
 import {StartPage} from "../start/start";
 import {AuthService} from "../../providers/auth-service";
+import {Headers, RequestOptions, Response, Http} from "@angular/http";
+import {TakePhotoPage} from "../TakePhoto/TakePhoto";
+import {WinnerPage} from "../winner/winner";
 
 /*
   Generated class for the Loading page.
@@ -17,16 +20,51 @@ export class WaitingPage {
   loading: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  private loadingCtrl : LoadingController, private actionSheetCtrl: ActionSheetController, private auth: AuthService,) {
+  private loadingCtrl : LoadingController, private actionSheetCtrl: ActionSheetController,
+              private auth: AuthService, public http: Http) {
+
   }
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
-
     setTimeout(() => {
+      this.getResults(function(res){
+        let json = JSON.parse(JSON.stringify(res));
+        if (json != []) {
+          if (this.navParams.get("waitReason") == "notJudge"){
+            this.navCtrl.setRoot(TakePhotoPage, {}, {animate: true, direction: "forward"});
+          } else if (this.navParams.get("waitReason") == "waitingOnOthers"){
+            this.navCtrl.setRoot(WinnerPage, {obj: json}, {animate: true, direction: "forward"});
+          }
+        }
+      });
+
       console.log('Async operation has ended');
       refresher.complete();
     }, 2000);
+  }
+
+  getResults(callback) {
+    let url = 'http://ec2-34-204-93-190.compute-1.amazonaws.com:3000/results';
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    this.http
+        .get(url, options)
+        .map(
+            (response: Response) => {
+              console.log(response);
+              return response.json();
+            }
+        )
+        .subscribe(
+            (responseBody: Object) => {
+              console.log("Response Body: \"" + responseBody + "\"");
+              callback(responseBody);
+            }, err => {
+              // alert(err);
+            }
+        );
+    // return "";
   }
 
   presentActionSheet() {

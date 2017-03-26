@@ -55,7 +55,7 @@ export class JoinPage implements OnInit {
                         this.app.saveValueWithKey("username", this.registerCredentials.username);
                         this.app.saveValueWithKey("password", this.registerCredentials.password);
                         this.loading.dismiss();
-                        this.nav.setRoot(WaitingPage, {}, {animate: true, direction: "forward"})
+                        this.nav.setRoot(WaitingPage, {waitReason: "notJudge"}, {animate: true, direction: "forward"})
                     });
                 } else {
                     this.showPopup("error", reason);

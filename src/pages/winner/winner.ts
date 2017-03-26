@@ -4,140 +4,105 @@ import {AuthService} from "../../providers/auth-service";
 import {StartPage} from "../start/start";
 import {Player} from "../../app/player";
 import {MyApp} from "../../app/app.component";
+import {TakePhotoPage} from "../TakePhoto/TakePhoto";
+import {WaitingPage} from "../waiting/waiting";
 
 /*
-  Generated class for the Winner page.
+ Generated class for the Winner page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+ See http://ionicframework.com/docs/v2/components/#navigation for more info on
+ Ionic pages and navigation.
+ */
 @Component({
-  selector: 'page-winner',
-  templateUrl: 'winner.html'
+    selector: 'page-winner',
+    templateUrl: 'winner.html'
 })
 export class WinnerPage implements OnInit {
-  app: any = MyApp;
-  private players;
-  public loading: Loading;
+    app: any = MyApp;
+    private players;
+    public loading: Loading;
+    public highUser: string = "";
+    public highScore: string = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private nav: NavController, private auth: AuthService,
-              private actionSheetCtrl: ActionSheetController, public loadingCtrl: LoadingController) {}
+    constructor(public navCtrl: NavController, public navParams: NavParams, private nav: NavController, private auth: AuthService,
+                private actionSheetCtrl: ActionSheetController, public loadingCtrl: LoadingController) {
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad WinnerPage');
-  }
 
-  ngOnInit(): void {
-    this.getPlayers();
-  }
-
-  getPlayers(): void {
-    // MyApp.fetchValueFromKey("players").then((data) => {
-      // if (data != null) {
-      //   this.fromStorage(data);
-      // } else {
-        this.presentLoading();
+    ngOnInit(): void {
         this.fromService("");
-      // }
-    // });
-  }
+    }
 
-  // fromStorage(json: string): void {
-  //   let players: Array<Player> = [];
-  //
-  //   JSON.parse(JSON.stringify(json))
-  //     .map((player: Player) => {
-  //       players.push(player);
-  //     });
-  //
-  //   this.playerTable = players;
-  // }
+    fromService(option: String): void {
 
-  fromService(option: String): void {
-    setTimeout(() => {
-      this.players = [{
-        "round" : 1,
-        "username" : "Kyle",
-        "scoreThisRound" : 0,
-        "totalScore" : 79
-      }, {
-        "round" : 1,
-        "username" : "Justin",
-        "scoreThisRound" : 50,
-        "totalScore" : 50
-      }, {
-        "round" : 1,
-        "username" : "Alex",
-        "scoreThisRound" : 0,
-        "totalScore" : 95
-      }, {
-        "round" : 1,
-        "username" : "Brandon",
-        "scoreThisRound" : 0,
-        "totalScore" : 80
-      }];
+        this.players = this.navParams.get("obj");
 
-      this.players = JSON.parse(JSON.stringify(this.players));
+        Player.round = this.players[0].round++;
+        MyApp.saveValueWithKey("round", this.players[0].round++);
 
-      Player.round = this.players[0].round++;
-      MyApp.saveValueWithKey("round", this.players[0].round++);
+        this.players.forEach(function (player) {
+            if (player.username == Player.username) {
+                Player.id = player.playerID;
+                Player.scoreThisRound = player.score;
+                MyApp.saveValueWithKey("scoreThisRound", Player.scoreThisRound);
+                Player.totalScore = player.totalScore;
+                MyApp.saveValueWithKey("totalScore", Player.totalScore);
+                if (player.placement == 0) {
+                    Player.isJudge = true;
+                    this.highScore = player.score;
+                    this.highUser = Player.username;
+                } else {
+                    Player.isJudge = false;
+                }
+            }
+        });
 
-      this.players.forEach(function(player){
-        if (player.username == Player.username){
-          Player.scoreThisRound = player.scoreThisRound;
-          MyApp.saveValueWithKey("scoreThisRound", Player.scoreThisRound);
-          Player.totalScore = player.totalScore;
-          MyApp.saveValueWithKey("totalScore", Player.totalScore);
+        option != "no-loading" ? this.loading.dismissAll() : "";
+    }
+
+    nextRound() {
+        if (Player.isJudge) {
+            this.nav.setRoot(TakePhotoPage, {}, {animate: true, direction: "forward"});
+        } else {
+            this.nav.setRoot(WaitingPage, {waitReason: "notJudge"}, {animate: true, direction: "forward"});
         }
-      });
+    }
 
-      option != "no-loading" ? this.loading.dismissAll() : "";
-    }, 2000);
-  }
+    presentActionSheet() {
+        let actionSheet = this.actionSheetCtrl.create({
+            title: 'Are you sure you want to exit?',
+            buttons: [
+                {
+                    text: 'Exit',
+                    role: 'destructive',
+                    handler: () => {
+                        this.logout();
+                    }
+                }, {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    }
 
-  presentLoading() {
-    this.loading = this.loadingCtrl.create({
-      content: "Please wait..."
-    });
-    this.loading.present();
-  }
+    getWinner(currPlayer){
+        this.players.forEach(function(player){
+            if (player.totalScore > currPlayer.totalScore){
+                return "";
+            }
+        });
+        return "highlight";
+    }
 
-
-  doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 2000);
-  }
-
-  presentActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Are you sure you want to exit?',
-      buttons: [
-        {
-          text: 'Exit',
-          role: 'destructive',
-          handler: () => {
-            this.logout();
-          }
-        },{
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
-
-  public logout() {
-    this.auth.logout().subscribe(succ => {
-      this.nav.setRoot(StartPage, {}, {animate: true, direction: "back"})
-    });
-  }
+    public logout() {
+        this.auth.logout().subscribe(succ => {
+            this.nav.setRoot(StartPage, {}, {animate: true, direction: "back"})
+        });
+    }
 
 }

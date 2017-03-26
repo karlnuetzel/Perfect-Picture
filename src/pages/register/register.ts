@@ -37,7 +37,7 @@ export class RegisterPage implements OnInit {
   public register() {
     this.auth.register(this.registerCredentials).subscribe(success => {
         if (success) {
-          this.app.saveValueWithKey("gameId", this.registerCredentials.gameId);
+          this.app.saveValueWithKey("gameID", this.registerCredentials.gameId);
           this.app.saveValueWithKey("username", this.registerCredentials.username);
           this.app.saveValueWithKey("password", this.registerCredentials.password);
           this.createSuccess = true;

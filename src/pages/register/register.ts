@@ -11,7 +11,7 @@ import {MyApp} from "../../app/app.component";
 })
 export class RegisterPage implements OnInit {
   createSuccess = false;
-  registerCredentials = {gameId: '', username: '', password: ''};
+  registerCredentials = {gameID: '', username: '', password: ''};
   app: any = MyApp;
 
   constructor(private nav: NavController, private auth: AuthService, private toastCtrl: ToastController) {}
@@ -19,7 +19,7 @@ export class RegisterPage implements OnInit {
   ngOnInit() : void {
     this.app.fetchValueFromKey("gameID").then((value) => {
       if (value != null) {
-        this.registerCredentials.gameId = value;
+        this.registerCredentials.gameID = value;
       }
     });
     this.app.fetchValueFromKey("username").then((value) => {
@@ -37,7 +37,7 @@ export class RegisterPage implements OnInit {
   public register() {
     this.auth.register(this.registerCredentials).subscribe(success => {
         if (success) {
-          this.app.saveValueWithKey("gameID", this.registerCredentials.gameId);
+          this.app.saveValueWithKey("gameID", this.registerCredentials.gameID);
           this.app.saveValueWithKey("username", this.registerCredentials.username);
           this.app.saveValueWithKey("password", this.registerCredentials.password);
           this.createSuccess = true;

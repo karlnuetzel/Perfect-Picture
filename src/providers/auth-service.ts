@@ -24,7 +24,7 @@ export class AuthService {
     }
 
     public login(credentials) {
-        if (credentials.username === null || credentials.gameId === null) {
+        if (credentials.username === null || credentials.gameID === null) {
             return Observable.throw("Please insert credentials");
         } else {
             return Observable.create(observer => {
@@ -62,11 +62,11 @@ export class AuthService {
                             }
                         });
 
-                        MyApp.fetchValueFromKey("gameId").then((value) => {
+                        MyApp.fetchValueFromKey("gameID").then((value) => {
                             if (value != null) {
-                                Player.gameId = value;
+                                Player.gameID = value;
                             } else {
-                                Player.gameId = "0";
+                                Player.gameID = "0";
                             }
                         });
                     }
@@ -82,7 +82,7 @@ export class AuthService {
         let url = 'http://ec2-34-204-93-190.compute-1.amazonaws.com:3000/join';
         let body =
             {
-                "gameID": creds.gameId,
+                "gameID": creds.gameID,
                 "username": creds.username,
                 "password": creds.password
             };
@@ -110,17 +110,17 @@ export class AuthService {
     }
 
     public register(credentials) {
-        if (credentials.username === null || credentials.gameId === null || credentials.password === null) {
+        if (credentials.username === null || credentials.gameID === null || credentials.password === null) {
             return Observable.throw("Please insert credentials");
         } else {
             // At this point store the credentials to your backend!
             MyApp.saveValueWithKey("username", credentials.username);
-            MyApp.saveValueWithKey("gameID", credentials.gameId);
+            MyApp.saveValueWithKey("gameID", credentials.gameID);
             MyApp.saveValueWithKey("password", credentials.password);
             MyApp.saveValueWithKey("round", 1);
             MyApp.saveValueWithKey("scoreThisRound", 0);
             MyApp.saveValueWithKey("totalScore", 0);
-            Player.gameId = credentials.gameId;
+            Player.gameID = credentials.gameID;
             Player.username = credentials.username;
             Player.round = 1;
             Player.scoreThisRound = 0;
@@ -129,7 +129,7 @@ export class AuthService {
             let url = 'http://ec2-34-204-93-190.compute-1.amazonaws.com:3000/initializeGame';
             let body =
                 {
-                    "gameID": credentials.gameId,
+                    "gameID": credentials.gameID,
                     "username": credentials.username,
                     "password": credentials.password
                 };

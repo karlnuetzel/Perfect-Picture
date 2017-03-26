@@ -81,7 +81,7 @@ export class WinnerPage implements OnInit {
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers: headers});
         let body = {
-            gameID : Player.gameId
+            gameID : Player.gameID
         };
         this.http
             .post(url, body, options)

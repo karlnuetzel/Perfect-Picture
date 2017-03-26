@@ -13,7 +13,7 @@ import {WaitingPage} from "../waiting/waiting";
 export class JoinPage implements OnInit {
     loading: Loading;
     app: any = MyApp;
-    registerCredentials = {gameId: '', username: '', password: ''};
+    registerCredentials = {gameID: '', username: '', password: ''};
 
     constructor(private nav: NavController, private auth: AuthService,
                 private toastCtrl: ToastController, private loadingCtrl: LoadingController) {
@@ -21,9 +21,9 @@ export class JoinPage implements OnInit {
     }
 
     ngOnInit(): void {
-        this.app.fetchValueFromKey("gameId").then((value) => {
+        this.app.fetchValueFromKey("gameID").then((value) => {
             if (value != null) {
-                this.registerCredentials.gameId = value;
+                this.registerCredentials.gameID = value;
             }
         });
         this.app.fetchValueFromKey("username").then((value) => {
@@ -46,7 +46,7 @@ export class JoinPage implements OnInit {
                 if (allowed) {
                     setTimeout(() => {
                         this.showPopup('success', reason);
-                        this.app.saveValueWithKey("gameId", this.registerCredentials.gameId);
+                        this.app.saveValueWithKey("gameID", this.registerCredentials.gameID);
                         this.app.saveValueWithKey("username", this.registerCredentials.username);
                         this.app.saveValueWithKey("password", this.registerCredentials.password);
                         this.loading.dismiss();

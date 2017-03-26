@@ -82,7 +82,7 @@ export class TakePhotoPage {
     let url = 'http://ec2-34-204-93-190.compute-1.amazonaws.com:3000/uploadPicture';
     let body =
       {
-        "gameID": Player.gameId,
+        "gameID": Player.gameID,
         "roundID": "" + Player.round,
         "username": Player.username,
         // "playerID": "" + Player.id,
@@ -114,7 +114,7 @@ export class TakePhotoPage {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let body = {
-      gameID : Player.gameId
+      gameID : Player.gameID
     };
     this.http
         .post(url, body, options)

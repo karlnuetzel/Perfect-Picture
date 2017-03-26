@@ -5,7 +5,7 @@
 export class Player {
   public static round: number;
   public static username: string;
-  public static gameId : string = "0";
+  public static gameID : string = "0";
   public static id: string;
   public static isJudge: boolean;
   public static scoreThisRound: number;

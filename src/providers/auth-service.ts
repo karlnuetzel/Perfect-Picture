@@ -115,11 +115,12 @@ export class AuthService {
         } else {
             // At this point store the credentials to your backend!
             MyApp.saveValueWithKey("username", credentials.username);
-            MyApp.saveValueWithKey("gameId", credentials.gameId);
+            MyApp.saveValueWithKey("gameID", credentials.gameId);
             MyApp.saveValueWithKey("password", credentials.password);
             MyApp.saveValueWithKey("round", 1);
             MyApp.saveValueWithKey("scoreThisRound", 0);
             MyApp.saveValueWithKey("totalScore", 0);
+            Player.gameId = credentials.gameId;
             Player.username = credentials.username;
             Player.round = 1;
             Player.scoreThisRound = 0;
